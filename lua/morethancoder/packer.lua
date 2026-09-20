@@ -16,7 +16,9 @@ require("packer").init({
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use { 'wbthomason/packer.nvim' }
-    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+    -- master is frozen but is the only branch that works with the
+    -- `nvim-treesitter.configs` API used here; `main` is a rewrite (needs a config migration)
+    use('nvim-treesitter/nvim-treesitter', { branch = 'master', run = ':TSUpdate' })
     use('mbbill/undotree')
     use('theprimeagen/harpoon')
     use('tpope/vim-fugitive')
@@ -26,9 +28,11 @@ return require('packer').startup(function(use)
         branch = 'v2.x',
         requires = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+            -- pinned: later versions deprecate the require('lspconfig') framework lsp-zero v2 relies on
+            { 'neovim/nvim-lspconfig', tag = 'v2.5.0' }, -- Required
+            -- pinned to 1.x: mason 2.x auto-enables servers, which conflicts with lsp-zero v2
+            { 'williamboman/mason.nvim', tag = 'v1.11.0' },           -- Optional
+            { 'williamboman/mason-lspconfig.nvim', tag = 'v1.32.0' }, -- Optional
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },     -- Required
@@ -37,7 +41,7 @@ return require('packer').startup(function(use)
         }
     }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
+        'nvim-telescope/telescope.nvim', tag = 'v0.2.2',
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
@@ -94,5 +98,24 @@ return require('packer').startup(function(use)
                 { expr = true, silent = true })
             vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
         end
+    }
+
+    use "ThePrimeagen/vim-be-good"
+    use "AndrewRadev/tagalong.vim"
+    use "tpope/vim-surround"
+
+
+    -- opencode nvim
+    -- use {
+    --     "NickvanDyke/opencode.nvim",
+    --     requires = { { "folke/snacks.nvim" } }
+    -- }
+    --
+    --
+    -- TODO Comments plugin
+    use {
+        'folke/todo-comments.nvim',
+        requires = { 'nvim-lua/plenary.nvim' },
+        -- no inline config here
     }
 end)

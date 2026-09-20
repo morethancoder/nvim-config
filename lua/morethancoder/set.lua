@@ -12,7 +12,11 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
-vim.opt.wrap = false
+-- text wrap options
+-- vim.opt.wrap = false
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -38,5 +42,4 @@ vim.g.codeium_enabled = false
 vim.g.lsp_log_max_size = 1024 * 1024 -- 1MB limit
 
 vim.cmd("set termbidi")
-
 
