@@ -18,7 +18,7 @@ return require('packer').startup(function(use)
     use { 'wbthomason/packer.nvim' }
     -- master is frozen but is the only branch that works with the
     -- `nvim-treesitter.configs` API used here; `main` is a rewrite (needs a config migration)
-    use('nvim-treesitter/nvim-treesitter', { branch = 'master', run = ':TSUpdate' })
+    use { 'nvim-treesitter/nvim-treesitter', branch = 'master', run = ':TSUpdate' }
     use('mbbill/undotree')
     use('theprimeagen/harpoon')
     use('tpope/vim-fugitive')
