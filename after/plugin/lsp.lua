@@ -46,12 +46,6 @@ lspconfig.html.setup({
     filetypes = { "html", "templ" },
 })
 
-lspconfig.htmx.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { "html", "templ" },
-})
-
 lspconfig.tailwindcss.setup({
     on_attach = on_attach,
     capabilities = capabilities,

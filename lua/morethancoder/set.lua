@@ -39,7 +39,13 @@ vim.opt.updatetime = 50
 vim.g.mapleader = ' '
 vim.g.codeium_enabled = false
 
-vim.g.lsp_log_max_size = 1024 * 1024 -- 1MB limit
+-- clear the LSP log on startup once it grows past 10MB
+local lsp_log = vim.fn.stdpath("state") .. "/lsp.log"
+local lsp_log_stat = vim.uv.fs_stat(lsp_log)
+if lsp_log_stat and lsp_log_stat.size > 10 * 1024 * 1024 then
+    local f = io.open(lsp_log, "w")
+    if f then f:close() end
+end
 
 vim.cmd("set termbidi")
 

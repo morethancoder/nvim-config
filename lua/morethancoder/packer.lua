@@ -20,7 +20,7 @@ return require('packer').startup(function(use)
     -- `nvim-treesitter.configs` API used here; `main` is a rewrite (needs a config migration)
     use { 'nvim-treesitter/nvim-treesitter', branch = 'master', run = ':TSUpdate' }
     use('mbbill/undotree')
-    use('theprimeagen/harpoon')
+    use { 'ThePrimeagen/harpoon', branch = 'harpoon2', requires = { 'nvim-lua/plenary.nvim' } }
     use('tpope/vim-fugitive')
     use { 'nvim-lualine/lualine.nvim' }
     use {
@@ -118,4 +118,17 @@ return require('packer').startup(function(use)
         requires = { 'nvim-lua/plenary.nvim' },
         -- no inline config here
     }
+
+    -- file tree sidebar, see after/plugin/nvim-tree.lua
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+    }
+
+    -- buffers shown as tabs, see after/plugin/bufferline.lua
+    -- disabled: uncomment and run :PackerSync to turn it back on
+    -- use {
+    --     'akinsho/bufferline.nvim', tag = '*',
+    --     requires = { 'nvim-tree/nvim-web-devicons' },
+    -- }
 end)
